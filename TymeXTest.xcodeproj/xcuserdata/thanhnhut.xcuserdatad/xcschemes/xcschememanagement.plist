@@ -7,7 +7,25 @@
 		<key>TymeXTest.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>6</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>6D26B9A02C6FF47900267428</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D26B9B92C6FF47C00267428</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D26B9C32C6FF47C00267428</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

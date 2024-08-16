@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  TymeXTest
 //
-//  Created by Thanh Nhut on 17/8/24.
+//  Created by Thanh Nhut on 16/8/24.
 //
 
 import UIKit
@@ -10,13 +10,42 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    let appDIContainer = AppDIContainer()
+    var appFlowNavigator: AppFlowNavigator?
+    
+    var rootViewController: UIViewController? {
+        get {
+            return window?.rootViewController
+        }
+        set {
+            window?.rootViewController = newValue
+        }
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        self.rootViewController = LaunchScreenViewController()
+        self.window?.makeKeyAndVisible()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+            guard let self = self else { return }
+            
+            let navigationController = BaseNavigationController()
+            self.rootViewController = navigationController
+            
+            self.appFlowNavigator = AppFlowNavigator(
+                navigationController: navigationController,
+                appDIContainer: self.appDIContainer
+            )
+            
+            self.appFlowNavigator?.start()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

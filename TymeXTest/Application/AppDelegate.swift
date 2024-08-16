@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  TymeXTest
 //
-//  Created by Thanh Nhut on 17/8/24.
+//  Created by Thanh Nhut on 16/8/24.
 //
 
 import UIKit
