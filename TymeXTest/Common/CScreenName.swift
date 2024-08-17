@@ -9,5 +9,6 @@ import Foundation
 
 enum CScreenName: String {
     case Home
+    case UserDetails
     case unowned
 }

@@ -1,6 +1,6 @@
 //
 //  GithubUserCell.swift
-//  BeeCow
+//  TymeXTest
 //
 //  Created by Thanh Nhut on 7/5/24.
 //  Copyright © 2024 Mediastep. All rights reserved.
@@ -8,24 +8,25 @@
 
 import UIKit
 
-enum GithubUserCellMode {
-    case list
-    case detail
-}
-
 class GithubUserCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var landingPageLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var contentStackView: UIStackView!
+    
+    enum GithubUserCellMode {
+        case list
+        case detail
+    }
     
     var data: CUser?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        containerView.roundCornersAndDropShadow(cRadius: 8, sColor: UIColor.gray, sOpacity: 0.25, sOffset: .zero, sBlur: 50, sSpread: 0)
+        containerView.roundCornersAndDropShadow(cRadius: 12, sColor: UIColor.black, sOpacity: 0.25, sOffset: .zero, sBlur: 50, sSpread: 0)
     }
     
     override func prepareForReuse() {
@@ -40,6 +41,7 @@ class GithubUserCell: UITableViewCell {
     func bindData(user: CUser?, mode: GithubUserCellMode = .list) {
         self.data = user
         
+        contentStackView.spacing = mode == .list ? 4 : 8
         addressLabel.superview?.isHidden = mode == .list
         landingPageLabel.isHidden = mode == .detail
         usernameLabel.text = user?.username

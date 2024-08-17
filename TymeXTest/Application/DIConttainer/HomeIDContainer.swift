@@ -25,7 +25,7 @@ final class HomeIDContainer: CBaseDIContainer {
     
     func makeRepository(screenName: CScreenName) -> CRepository? {
         switch screenName {
-        case .Home:
+        case .Home, .UserDetails:
             return UserRepositoryHandler(dataTransferService: dependencies.apiDataTransferService)
         default:
             return nil
@@ -34,7 +34,7 @@ final class HomeIDContainer: CBaseDIContainer {
     
     func makeUseCase(screenName: CScreenName) -> CUseCase? {
         switch screenName {
-        case .Home:
+        case .Home, .UserDetails:
             guard let userRepository = makeRepository(screenName: screenName) as? UserRepository else { return nil }
             
             return UserUseCaseHandler(userRepository: userRepository,
@@ -43,37 +43,40 @@ final class HomeIDContainer: CBaseDIContainer {
             return nil
         }
     }
-    
-    func makeViewModel(screenName: CScreenName, actions: HomeViewModelActions?) -> BaseViewModel? {
-        switch screenName {
-        case .Home:
-            guard let userUsecase = makeUseCase(screenName: screenName) as? UserUseCase else { return nil }
-            
-            return HomeViewModel(userUsecase: userUsecase, actions: actions)
-        default:
-            return nil
-        }
-    }
 }
 
 extension HomeIDContainer: HomeNavigatorDependencies {
+    
+    // MARK: Home
+    func makeHomeVM(actions: HomeViewModelActions?) -> BaseViewModel? {
+        guard let userUsecase = makeUseCase(screenName: .Home) as? UserUseCase else { return nil }
+        
+        return HomeViewModel(userUsecase: userUsecase, actions: actions)
+    }
+    
     func makeHomeViewController(actions: HomeViewModelActions?) -> HomeViewController {
-        let viewModel = makeViewModel(screenName: .Home, actions: actions) as? HomeViewModel
+        let viewModel = makeHomeVM(actions: actions) as? HomeViewModel
         
         return HomeViewController(viewModel: viewModel)
     }
     
-    func makeUserDetailViewController(actions: HomeViewModelActions?) -> HomeViewController {
-        let viewModel = makeViewModel(screenName: .Home, actions: actions) as? HomeViewModel
+    // MARK: User Details
+    func makeUserDetailVM(user: CUser?, actions: UserDetailsModelActions?) -> BaseViewModel? {
+        guard let userUsecase = makeUseCase(screenName: .UserDetails) as? UserUseCase else { return nil }
         
-        return HomeViewController(viewModel: viewModel)
+        return UserDetailsVM(user: user, userUsecase: userUsecase, actions: actions)
+    }
+    
+    func makeUserDetailViewController(user: CUser?, actions: UserDetailsModelActions?) -> UserDetailsViewController {
+        let viewModel = makeUserDetailVM(user: user, actions: actions) as? UserDetailsVM
+        
+        return UserDetailsViewController(viewModel: viewModel)
     }
 }
 
 // MARK: - Flow Coordinators
 extension HomeIDContainer {
     func makeHomeNavigator(navigationController: BaseNavigationController) -> HomeNavigator {
-        return HomeNavigator(navigationController: navigationController,
-                      dependencies: self)
+        return HomeNavigator(navigationController: navigationController, dependencies: self)
     }
 }

@@ -5,8 +5,6 @@
 //  Created by Nguyen Thanh Nhut on 2023/04/14.
 //
 
-import iOSAPIService
-
 struct HomeViewModelActions {
     let showUserDetails: (CUser?) -> Void
 }
@@ -14,7 +12,7 @@ struct HomeViewModelActions {
 protocol HomeViewModelInput {
     func fetchData(isRefresh: Bool)
     func loadMoreIfNeed()
-    func fetchUserProfileData()
+    func didSelectItem(at index: Int)
 }
 
 protocol HomeViewModelOutput {
@@ -81,16 +79,7 @@ extension HomeViewModel {
         fetchData()
     }
     
-    func fetchUserProfileData() {
-        let params = UserProfileParams(username: "fanvsfan")
-        userUsecase.getUserProfile(params: params) { usersCache in
-            
-        } completion: {  [weak self] result in
-            switch result {
-            case .success(let user):
-                print(user)
-            case .failure: break
-            }
-        }
+    func didSelectItem(at index: Int) {
+        actions?.showUserDetails(userList.value[safe: index])
     }
 }

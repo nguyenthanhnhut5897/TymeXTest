@@ -17,7 +17,4 @@ protocol CBaseDIContainer {
     
     // MARK: - Use Cases
     func makeUseCase(screenName: CScreenName) -> CUseCase?
-    
-    // MARK: - View Model
-    func makeViewModel(screenName: CScreenName, actions: HomeViewModelActions?) -> BaseViewModel?
 }

@@ -24,7 +24,6 @@ class HomeViewController: BaseViewController {
         
         setupViews()
         vm?.fetchData()
-        vm?.fetchUserProfileData()
     }
     
     override func bind() {
@@ -98,5 +97,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.bindData(user: user)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        vm?.didSelectItem(at: indexPath.row)
     }
 }
