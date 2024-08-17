@@ -12,12 +12,14 @@ struct HomeViewModelActions {
 }
 
 protocol HomeViewModelInput {
-    func fetchData()
+    func fetchData(isRefresh: Bool)
+    func loadMoreIfNeed()
     func fetchUserProfileData()
 }
 
 protocol HomeViewModelOutput {
-    var title: Observable<String?> { get }
+    var userList: Observable<[CUser]> { get }
+    var error: Observable<Error?> { get }
 }
 
 final class HomeViewModel: BaseViewModel, HomeViewModelInput, HomeViewModelOutput {
@@ -26,28 +28,57 @@ final class HomeViewModel: BaseViewModel, HomeViewModelInput, HomeViewModelOutpu
     private let actions: HomeViewModelActions?
 
     // MARK: - OUTPUT
-    var title: Observable<String?> = Observable(nil)
+    var userList: Observable<[CUser]> = Observable([])
+    var error: Observable<Error?> = Observable(nil)
     
     init(userUsecase: UserUseCase, actions: HomeViewModelActions?) {
-        self.title.value = "Home"
         self.userUsecase = userUsecase
         self.actions = actions
     }
 }
 
 extension HomeViewModel {
-    func fetchData() {
-        let params = GetUserListParams(page: 0, perPage: 20)
+    func fetchData(isRefresh: Bool = false) {
+        if isRefresh {
+            page = 0
+        }
+        
+        if !isRefresh, page == 0 {
+            LoadingView.show()
+        }
+        
+        let params = GetUserListParams(page: page, perPage: limit)
         
         userUsecase.getUsersList(params: params) { usersCache in
             
         } completion: { [weak self] result in
+            guard let self else { return }
+            
+            LoadingView.hide()
+            self.isLoading = false
+            
             switch result {
             case .success(let users):
-                self?.title.value = users?.first?.username
-            case .failure: break
+                if isRefresh {
+                    self.userList.value = users.unwrapped(or: [])
+                } else {
+                    self.userList.value.append(contentsOf: users.unwrapped(or: []))
+                }
+                
+                self.hasMoreData = users.unwrapped(or: []).count == self.limit
+                self.page += 1
+            case .failure(let error):
+                self.error.value = error
+                print(error.localizedDescription)
             }
         }
+    }
+    
+    func loadMoreIfNeed() {
+        guard !isLoading, hasMoreData else { return }
+        
+        isLoading = true
+        fetchData()
     }
     
     func fetchUserProfileData() {
@@ -57,7 +88,7 @@ extension HomeViewModel {
         } completion: {  [weak self] result in
             switch result {
             case .success(let user):
-                self?.title.value = user?.username
+                print(user)
             case .failure: break
             }
         }

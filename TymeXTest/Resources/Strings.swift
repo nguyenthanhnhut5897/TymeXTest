@@ -8,9 +8,9 @@
 import Foundation
 
 
-struct ChillLocalization {
+struct TymeXTestLocalization {
     
-    static var shared = ChillLocalization()
+    static var shared = TymeXTestLocalization()
     
     internal enum Table: String {
         case `default`
@@ -30,7 +30,7 @@ struct ChillLocalization {
 
 // MARK: - Supports
 //
-extension ChillLocalization {
+extension TymeXTestLocalization {
     
     /// Return defined string based on corresponding target table and key.
     internal func string(forKey key: String, in table: Table = .localizable) -> String {
@@ -42,26 +42,18 @@ extension ChillLocalization {
 
 struct Strings {}
 
-
 // Generals
 extension Strings {
     static var OKTitle : String {
-        return ChillLocalization.shared.string(forKey: "OK")
+        return "OK".textLocalized
     }
     static var YesTitle : String {
-        return ChillLocalization.shared.string(forKey: "Yes")
+        return "Yes".textLocalized
     }
     static var CancelTitle : String {
-        return ChillLocalization.shared.string(forKey: "Cancel")
+        return "Cancel".textLocalized
     }
     static var ErrorTitle : String {
-        return ChillLocalization.shared.string(forKey: "Error")
-    }
-}
-
-// Login
-extension Strings {
-    static var loginTitle : String {
-        return ChillLocalization.shared.string(forKey: "Login")
+        return "Error".textLocalized
     }
 }

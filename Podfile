@@ -7,7 +7,7 @@ target 'TymeXTest' do
 
   pod 'SnapKit'
   pod 'iOSAPIService', :git => 'https://github.com/nguyenthanhnhut5897/iOSAPIService.git', :tag => '1.0.4'
-
+  pod 'SDWebImage'
 
   target 'TymeXTestTests' do
     inherit! :search_paths

@@ -9,7 +9,7 @@ import UIKit
 
 class LaunchScreenViewController: BaseViewController {
     var titleLabel = UILabel().then {
-        $0.text = "CHILL TIME"
+        $0.text = "TymeXTest"
         $0.textAlignment = .center
         $0.backgroundColor = .red
     }

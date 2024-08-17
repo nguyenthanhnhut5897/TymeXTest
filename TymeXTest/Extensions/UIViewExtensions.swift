@@ -87,6 +87,21 @@ extension UIView {
         self.layer.cornerRadius = radius
         self.clipsToBounds = true
     }
+    
+    func roundCornersAndDropShadow(cRadius: CGFloat, sColor: UIColor, sOpacity: Float, sOffset: CGSize, sBlur: CGFloat, sSpread: CGFloat) {
+        layer.cornerRadius = cRadius
+        layer.shadowColor = sColor.cgColor
+        layer.shadowOpacity = sOpacity
+        layer.shadowOffset = sOffset
+        layer.shadowRadius = sBlur / 2
+        if sSpread == 0 {
+            layer.shadowPath = nil
+        } else {
+            layer.shadowPath = UIBezierPath(rect: bounds.insetBy(dx: -sSpread, dy: -sSpread)).cgPath
+        }
+        layer.masksToBounds = false
+        clipsToBounds = false
+    }
 }
 
 extension UIView {

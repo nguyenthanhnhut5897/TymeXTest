@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  TymeXTest
+
+  Created by Thanh Nhut on 17/8/24.
+  
+*/
+
+"Cancel" = "Huỷ";
+"Error" = "Lỗi";
+"Yes" = "Đồng ý";
+"OK" = "OK";

@@ -29,9 +29,9 @@ protocol BaseSectionConfigurable {
 }
 
 class BaseViewModel {
-    var page: Int = 1
+    var page: Int = 0
     var limit: Int = 20
-    var loadMore: Bool = true
+    var hasMoreData: Bool = true
     var isLoading: Bool = false
     
     var viewModels = [BasePresentable]()

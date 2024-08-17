@@ -23,6 +23,7 @@ class BaseViewController: CBaseViewController, UIScrollViewDelegate {
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
         self.setupHandler()
+        self.bind()
     }
     
     func setupHandler() {
@@ -30,6 +31,8 @@ class BaseViewController: CBaseViewController, UIScrollViewDelegate {
             (self as? HideKeyboardable)?.addHideKeyboardWhenTappedAround()
         }
     }
+    
+    func bind() {}
     
     func addLeftNaviBarButton(image: UIImage? = UIImage(named: "navigation_back"),
                               tintColor: UIColor = .TymeXTest.textColor,
@@ -251,7 +254,7 @@ class BaseViewController: CBaseViewController, UIScrollViewDelegate {
         let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.3
         let rawOptions = (userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue ?? 0
         
-        guard let animationOptions = UIView.AnimationCurve(rawValue: rawOptions) else {
+        guard UIView.AnimationCurve(rawValue: rawOptions) != nil else {
             openKeyboardHandle(rect)
             return
         }
@@ -269,7 +272,7 @@ class BaseViewController: CBaseViewController, UIScrollViewDelegate {
         
         let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.3
         let rawOptions = (userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue ?? 0
-        guard let animationOptions = UIView.AnimationCurve(rawValue: rawOptions) else {
+        guard UIView.AnimationCurve(rawValue: rawOptions) != nil else {
             closeKeyboardHandle()
             return
         }

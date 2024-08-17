@@ -44,3 +44,9 @@ extension String {
         }
     }
 }
+
+extension String {
+    var textLocalized: String {
+        return TymeXTestLocalization.shared.string(forKey: self)
+    }
+}

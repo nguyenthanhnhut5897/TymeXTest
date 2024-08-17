@@ -8,40 +8,95 @@
 import UIKit
 
 class HomeViewController: BaseViewController {
-
-    let titleLabel = UILabel().then {
-        $0.text = ""
-        $0.textAlignment = .center
-        $0.backgroundColor = .blue
-    }
+    private let tableView = UITableView()
+    private let refreshControl = UIRefreshControl()
     
-    private var viewModel: HomeViewModel?
+    private var vm: HomeViewModel?
     
     convenience init(viewModel: HomeViewModel?) {
         self.init()
         
-        self.viewModel = viewModel
+        self.vm = viewModel
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
-        viewModel?.fetchData()
-        viewModel?.fetchUserProfileData()
+        vm?.fetchData()
+        vm?.fetchUserProfileData()
     }
     
-    private func bind(to viewModel: HomeViewModel) {
-        viewModel.title.observe(on: self) { [weak self] in self?.titleLabel.text = $0 }
+    override func bind() {
+        vm?.userList.observe(on: self) { [weak self] _ in
+            self?.tableView.reloadData()
+            self?.refreshControl.endRefreshing()
+        }
+        
+        vm?.error.observe(on: self) { [weak self] _ in
+            self?.refreshControl.endRefreshing()
+        }
     }
     
     override func setupViews() {
-        view.addSubview(titleLabel)
+        title = "Github Users"
+        view.addSubview(tableView)
         
-        titleLabel.snp.makeConstraints {
+        tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        titleLabel.text = viewModel?.title.value
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        tableView.estimatedRowHeight = 44
+        tableView.sectionHeaderHeight = CGFloat.leastNonzeroMagnitude
+        tableView.sectionFooterHeight = CGFloat.leastNonzeroMagnitude
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.regisCells(GithubUserCell.className)
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshDataInfo), for: .valueChanged)
+    }
+    
+    @objc func refreshDataInfo() {
+        vm?.fetchData(isRefresh: true)
+    }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return vm?.userList.value.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (vm?.userList.value.count ?? 0) - 1 {
+            vm?.loadMoreIfNeed()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.className, for: indexPath) as? GithubUserCell else {
+            return UITableViewCell().then {
+                $0.selectionStyle = .none
+            }
+        }
+        
+        let user = vm?.userList.value[safe: indexPath.row]
+        
+        cell.bindData(user: user)
+        
+        return cell
     }
 }
