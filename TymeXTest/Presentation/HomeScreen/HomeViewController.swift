@@ -28,12 +28,16 @@ class HomeViewController: BaseViewController {
     
     override func bind() {
         vm?.userList.observe(on: self) { [weak self] _ in
-            self?.tableView.reloadData()
-            self?.refreshControl.endRefreshing()
+            executeBlockOnMainIfNeeded { [weak self] in
+                self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
+            }
         }
         
         vm?.error.observe(on: self) { [weak self] _ in
-            self?.refreshControl.endRefreshing()
+            executeBlockOnMainIfNeeded { [weak self] in
+                self?.refreshControl.endRefreshing()
+            }
         }
     }
     

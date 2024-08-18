@@ -6,7 +6,7 @@
 //
 
 struct HomeViewModelActions {
-    let showUserDetails: (CUser?) -> Void
+    let showUserDetails: (GUser?) -> Void
 }
 
 protocol HomeViewModelInput {
@@ -16,7 +16,7 @@ protocol HomeViewModelInput {
 }
 
 protocol HomeViewModelOutput {
-    var userList: Observable<[CUser]> { get }
+    var userList: Observable<[GUser]> { get }
     var error: Observable<Error?> { get }
 }
 
@@ -26,7 +26,7 @@ final class HomeViewModel: BaseViewModel, HomeViewModelInput, HomeViewModelOutpu
     private let actions: HomeViewModelActions?
 
     // MARK: - OUTPUT
-    var userList: Observable<[CUser]> = Observable([])
+    var userList: Observable<[GUser]> = Observable([])
     var error: Observable<Error?> = Observable(nil)
     
     init(userUsecase: UserUseCase, actions: HomeViewModelActions?) {
@@ -46,8 +46,13 @@ extension HomeViewModel {
         }
         
         let params = GetUserListParams(page: page, perPage: limit)
+        var hasDataCache: Bool = false
         
-        userUsecase.getUsersList(params: params) { usersCache in
+        userUsecase.getUsersList(params: params) { [weak self] usersCache in
+            guard let self else { return }
+            LoadingView.hide()
+            self.userList.value = usersCache.unwrapped(or: [])
+            hasDataCache = true
             
         } completion: { [weak self] result in
             guard let self else { return }
@@ -66,6 +71,10 @@ extension HomeViewModel {
                 self.hasMoreData = users.unwrapped(or: []).count == self.limit
                 self.page += 1
             case .failure(let error):
+                if hasDataCache {
+                    self.page += 1
+                }
+                
                 self.error.value = error
                 print(error.localizedDescription)
             }

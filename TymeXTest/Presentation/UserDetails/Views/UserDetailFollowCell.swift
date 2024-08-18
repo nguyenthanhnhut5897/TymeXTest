@@ -3,7 +3,7 @@
 //  TymeXTest
 //
 //  Created by Thanh Nhut on 7/5/24.
-//  Copyright © 2024 Mediastep. All rights reserved.
+//  Copyright © 2024 Thanh Nhut. All rights reserved.
 //
 
 import UIKit
@@ -28,7 +28,7 @@ class UserDetailFollowCell: UITableViewCell {
         followingNumberLabel.text = nil
     }
     
-    func bindData(user: CUser?) {
+    func bindData(user: GUser?) {
         followerNumberLabel.text = "\(user?.followers ?? 0)"
         followingNumberLabel.text = "\(user?.following ?? 0)"
     }

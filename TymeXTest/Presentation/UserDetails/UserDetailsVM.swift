@@ -14,11 +14,11 @@ enum UserDetailsCellType: Int, CaseIterable {
 struct UserDetailsModelActions {}
 
 protocol UserDetailsVMInput {
-    func fetchData()
+    func fetchData(isRefresh: Bool)
 }
 
 protocol UserDetailsVMOutput {
-    var userInfo: Observable<CUser?> { get }
+    var userInfo: Observable<GUser?> { get }
     var error: Observable<Error?> { get }
 }
 
@@ -28,10 +28,10 @@ final class UserDetailsVM: BaseViewModel, UserDetailsVMInput, UserDetailsVMOutpu
     private let actions: UserDetailsModelActions?
 
     // MARK: - OUTPUT
-    var userInfo: Observable<CUser?> = Observable(nil)
+    var userInfo: Observable<GUser?> = Observable(nil)
     var error: Observable<Error?> = Observable(nil)
     
-    init(user: CUser?, userUsecase: UserUseCase, actions: UserDetailsModelActions?) {
+    init(user: GUser?, userUsecase: UserUseCase, actions: UserDetailsModelActions?) {
         self.userInfo.value = user
         self.userUsecase = userUsecase
         self.actions = actions
@@ -39,13 +39,15 @@ final class UserDetailsVM: BaseViewModel, UserDetailsVMInput, UserDetailsVMOutpu
 }
 
 extension UserDetailsVM {
-    func fetchData() {
+    func fetchData(isRefresh: Bool = false) {
         guard let username = userInfo.value?.username else {
             userInfo.value = nil
             return
         }
         
-        LoadingView.show()
+        if !isRefresh {
+            LoadingView.show()
+        }
         
         let params = UserProfileParams(username: username)
         

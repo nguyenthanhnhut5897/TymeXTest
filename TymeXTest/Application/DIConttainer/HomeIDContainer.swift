@@ -14,10 +14,8 @@ final class HomeIDContainer: CBaseDIContainer {
     
     var dependencies: ApiDependencies
     
-    private var userResponseCache: UserRepositoryCaches = UserRepositoryCachesHandler()
-    
-    // MARK: - Persistent Storage
-    #warning("implement store date to Storage later")
+    // MARK: - Storage
+    private var userResponseCache: UserRepositoryCaches = UserRepositoryCachesHandler(maxStorageLimit: 20)
     
     init(dependencies: ApiDependencies) {
         self.dependencies = dependencies
@@ -26,7 +24,8 @@ final class HomeIDContainer: CBaseDIContainer {
     func makeRepository(screenName: CScreenName) -> CRepository? {
         switch screenName {
         case .Home, .UserDetails:
-            return UserRepositoryHandler(dataTransferService: dependencies.apiDataTransferService)
+            return UserRepositoryHandler(dataTransferService: dependencies.apiDataTransferService,
+                                         cache: userResponseCache)
         default:
             return nil
         }
@@ -37,8 +36,7 @@ final class HomeIDContainer: CBaseDIContainer {
         case .Home, .UserDetails:
             guard let userRepository = makeRepository(screenName: screenName) as? UserRepository else { return nil }
             
-            return UserUseCaseHandler(userRepository: userRepository,
-                                      userRepositoryCaches: userResponseCache)
+            return UserUseCaseHandler(userRepository: userRepository)
         default:
             return nil
         }
@@ -61,13 +59,13 @@ extension HomeIDContainer: HomeNavigatorDependencies {
     }
     
     // MARK: User Details
-    func makeUserDetailVM(user: CUser?, actions: UserDetailsModelActions?) -> BaseViewModel? {
+    func makeUserDetailVM(user: GUser?, actions: UserDetailsModelActions?) -> BaseViewModel? {
         guard let userUsecase = makeUseCase(screenName: .UserDetails) as? UserUseCase else { return nil }
         
         return UserDetailsVM(user: user, userUsecase: userUsecase, actions: actions)
     }
     
-    func makeUserDetailViewController(user: CUser?, actions: UserDetailsModelActions?) -> UserDetailsViewController {
+    func makeUserDetailViewController(user: GUser?, actions: UserDetailsModelActions?) -> UserDetailsViewController {
         let viewModel = makeUserDetailVM(user: user, actions: actions) as? UserDetailsVM
         
         return UserDetailsViewController(viewModel: viewModel)

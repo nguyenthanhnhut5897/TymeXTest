@@ -11,55 +11,42 @@ protocol UserUseCase: CUseCase {
     @discardableResult
     func getUsersList(
         params: GetUserListParams,
-        cached: @escaping ([CUser]?) -> Void,
-        completion: @escaping (Result<[CUser]?, Error>) -> Void
-    ) -> SessionCancellable?
+        cached: @escaping ([GUser]?) -> Void,
+        completion: @escaping (Result<[GUser]?, Error>) -> Void
+    ) -> TaskCancellable?
     
     @discardableResult
     func getUserProfile(
         params: UserProfileParams,
-        cached: @escaping (CUser?) -> Void,
-        completion: @escaping (Result<CUser?, Error>) -> Void
-    ) -> SessionCancellable?
+        cached: @escaping (GUser?) -> Void,
+        completion: @escaping (Result<GUser?, Error>) -> Void
+    ) -> TaskCancellable?
 }
 
 final class UserUseCaseHandler: UserUseCase {
 
     private let userRepository: UserRepository
-    private let userRepositoryCaches: UserRepositoryCaches
 
-    init(
-        userRepository: UserRepository,
-        userRepositoryCaches: UserRepositoryCaches
-    ) {
+    init(userRepository: UserRepository) {
         self.userRepository = userRepository
-        self.userRepositoryCaches = userRepositoryCaches
     }
     
     @discardableResult
     func getUsersList(params: GetUserListParams,
-               cached: @escaping ([CUser]?) -> Void,
-               completion: @escaping (Result<[CUser]?, Error>) -> Void) -> SessionCancellable?
+                      cached: @escaping ([GUser]?) -> Void,
+                      completion: @escaping (Result<[GUser]?, Error>) -> Void) -> TaskCancellable? 
     {
         return userRepository.getUsersList(query: params, cached: cached) { result in
-            if case .success = result {
-                self.userRepositoryCaches.saveRecentUserListQuery(query: params) { _ in }
-            }
-            
             completion(result)
         }
     }
     
     @discardableResult
     func getUserProfile(params: UserProfileParams,
-                       cached: @escaping (CUser?) -> Void,
-                       completion: @escaping (Result<CUser?, Error>) -> Void) -> SessionCancellable?
+                       cached: @escaping (GUser?) -> Void,
+                       completion: @escaping (Result<GUser?, Error>) -> Void) -> TaskCancellable?
     {
         return userRepository.getUserProfile(query: params, cached: cached) { result in
-            if case .success = result {
-                self.userRepositoryCaches.saveRecentUserQuery(query: params) { _ in }
-            }
-            
             completion(result)
         }
     }

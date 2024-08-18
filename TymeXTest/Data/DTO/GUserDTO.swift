@@ -1,5 +1,5 @@
 //
-//  CUserDTO.swift
+//  GUserDTO.swift
 //  TymeXTest
 //
 //  Created by Thanh Nhut on 12/7/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CUserDTO: Codable {
+struct GUserDTO: Codable {
     let username: String?
     let landingPageUrl: String?
     let avatarUrl: String?
@@ -22,8 +22,8 @@ struct CUserDTO: Codable {
         case location, followers, following
     }
     
-    func transferToUser() -> CUser {
-        return CUser(username: username, 
+    func transferToUser() -> GUser {
+        return GUser(username: username, 
                      landingPageUrl: landingPageUrl,
                      avatarUrl: avatarUrl,
                      location: location,

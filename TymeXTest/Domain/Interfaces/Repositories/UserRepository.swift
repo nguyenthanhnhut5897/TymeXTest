@@ -11,14 +11,14 @@ protocol UserRepository: CRepository {
     @discardableResult
     func getUserProfile(
         query: UserProfileParams,
-        cached: @escaping (CUser?) -> Void,
-        completion: @escaping (Result<CUser?, Error>) -> Void
-    ) -> SessionCancellable?
+        cached: @escaping (GUser?) -> Void,
+        completion: @escaping (Result<GUser?, Error>) -> Void
+    ) -> TaskCancellable?
     
     @discardableResult
     func getUsersList(
         query: GetUserListParams,
-        cached: @escaping ([CUser]?) -> Void,
-        completion: @escaping (Result<[CUser]?, Error>) -> Void
-    ) -> SessionCancellable?
+        cached: @escaping ([GUser]?) -> Void,
+        completion: @escaping (Result<[GUser]?, Error>) -> Void
+    ) -> TaskCancellable?
 }

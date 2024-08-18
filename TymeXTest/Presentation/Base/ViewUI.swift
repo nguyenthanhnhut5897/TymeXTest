@@ -41,7 +41,7 @@ struct ViewUI {
 
 extension UIWindow {
     static var key: UIWindow? {
-        #warning("Need to update it based on the window that is presenting (there are multi window form iOS 13")
+        #warning("Need to update it based on the window that is presenting (there are multi windows form iOS 13")
         return UIApplication.shared.windows.first { $0.isKeyWindow }
     }
 }

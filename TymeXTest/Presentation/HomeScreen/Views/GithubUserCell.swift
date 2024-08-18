@@ -3,7 +3,7 @@
 //  TymeXTest
 //
 //  Created by Thanh Nhut on 7/5/24.
-//  Copyright © 2024 Mediastep. All rights reserved.
+//  Copyright © 2024 Thanh Nhut. All rights reserved.
 //
 
 import UIKit
@@ -21,7 +21,7 @@ class GithubUserCell: UITableViewCell {
         case detail
     }
     
-    var data: CUser?
+    var data: GUser?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +38,7 @@ class GithubUserCell: UITableViewCell {
         usernameLabel.text = nil
     }
     
-    func bindData(user: CUser?, mode: GithubUserCellMode = .list) {
+    func bindData(user: GUser?, mode: GithubUserCellMode = .list) {
         self.data = user
         
         contentStackView.spacing = mode == .list ? 4 : 8

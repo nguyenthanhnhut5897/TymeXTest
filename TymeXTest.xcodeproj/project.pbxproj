@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		1FE3A2B986D06B3E34998B35 /* Pods_TymeXTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9CBBDBBCA785C9515B79D2 /* Pods_TymeXTestTests.framework */; };
 		65E18707FC08146CC182CD03 /* Pods_TymeXTest_TymeXTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6B8FE8C98C79AB33AD2F5D /* Pods_TymeXTest_TymeXTestUITests.framework */; };
-		6D26B9AF2C6FF47900267428 /* TymeXTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9AD2C6FF47900267428 /* TymeXTest.xcdatamodeld */; };
+		6D02ED812C71EBF90053EA26 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED802C71EBF90053EA26 /* CoreDataStorage.swift */; };
+		6D02ED872C71F0BC0053EA26 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED852C71F0BC0053EA26 /* CoreDataStorage.xcdatamodeld */; };
+		6D02ED8A2C71F3950053EA26 /* SUserEntityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED892C71F3950053EA26 /* SUserEntityExtensions.swift */; };
+		6D02ED8C2C720F3D0053EA26 /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED8B2C720F3D0053EA26 /* RepositoryTask.swift */; };
 		6D26B9B12C6FF47C00267428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D26B9B02C6FF47C00267428 /* Assets.xcassets */; };
 		6D26B9B42C6FF47C00267428 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6D26B9B32C6FF47C00267428 /* Base */; };
 		6D26B9BF2C6FF47C00267428 /* TymeXTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9BE2C6FF47C00267428 /* TymeXTestTests.swift */; };
@@ -26,10 +29,10 @@
 		6D26B9EE2C6FF5F600267428 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9E82C6FF5F600267428 /* UIViewExtensions.swift */; };
 		6D26B9F22C6FF61200267428 /* CScreenName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9EF2C6FF61200267428 /* CScreenName.swift */; };
 		6D26B9F32C6FF61200267428 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9F02C6FF61200267428 /* ErrorCode.swift */; };
-		6D26B9FA2C6FF61A00267428 /* CUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9F42C6FF61A00267428 /* CUserDTO.swift */; };
+		6D26B9FA2C6FF61A00267428 /* GUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9F42C6FF61A00267428 /* GUserDTO.swift */; };
 		6D26B9FB2C6FF61A00267428 /* UserRepositoryCachesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9F62C6FF61A00267428 /* UserRepositoryCachesHandler.swift */; };
 		6D26B9FC2C6FF61A00267428 /* UserRepositoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9F72C6FF61A00267428 /* UserRepositoryHandler.swift */; };
-		6D26BA072C6FF62300267428 /* CUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9FD2C6FF62300267428 /* CUser.swift */; };
+		6D26BA072C6FF62300267428 /* GUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9FD2C6FF62300267428 /* GUser.swift */; };
 		6D26BA082C6FF62300267428 /* UserRepositoryCaches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9FF2C6FF62300267428 /* UserRepositoryCaches.swift */; };
 		6D26BA092C6FF62300267428 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26BA012C6FF62300267428 /* UserRepository.swift */; };
 		6D26BA0A2C6FF62300267428 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26BA042C6FF62300267428 /* UserUseCase.swift */; };
@@ -98,8 +101,11 @@
 		55EEA26BE0996C56CD45E622 /* Pods-TymeXTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TymeXTest.debug.xcconfig"; path = "Target Support Files/Pods-TymeXTest/Pods-TymeXTest.debug.xcconfig"; sourceTree = "<group>"; };
 		56928C931D0F88D18BE90E63 /* Pods-TymeXTest-TymeXTestUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TymeXTest-TymeXTestUITests.debug.xcconfig"; path = "Target Support Files/Pods-TymeXTest-TymeXTestUITests/Pods-TymeXTest-TymeXTestUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6C6B8FE8C98C79AB33AD2F5D /* Pods_TymeXTest_TymeXTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TymeXTest_TymeXTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D02ED802C71EBF90053EA26 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		6D02ED862C71F0BC0053EA26 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
+		6D02ED892C71F3950053EA26 /* SUserEntityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUserEntityExtensions.swift; sourceTree = "<group>"; };
+		6D02ED8B2C720F3D0053EA26 /* RepositoryTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		6D26B9A12C6FF47900267428 /* TymeXTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TymeXTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D26B9AE2C6FF47900267428 /* TymeXTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TymeXTest.xcdatamodel; sourceTree = "<group>"; };
 		6D26B9B02C6FF47C00267428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D26B9B32C6FF47C00267428 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D26B9B52C6FF47C00267428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,10 +125,10 @@
 		6D26B9E82C6FF5F600267428 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		6D26B9EF2C6FF61200267428 /* CScreenName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CScreenName.swift; sourceTree = "<group>"; };
 		6D26B9F02C6FF61200267428 /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
-		6D26B9F42C6FF61A00267428 /* CUserDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUserDTO.swift; sourceTree = "<group>"; };
+		6D26B9F42C6FF61A00267428 /* GUserDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUserDTO.swift; sourceTree = "<group>"; };
 		6D26B9F62C6FF61A00267428 /* UserRepositoryCachesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepositoryCachesHandler.swift; sourceTree = "<group>"; };
 		6D26B9F72C6FF61A00267428 /* UserRepositoryHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepositoryHandler.swift; sourceTree = "<group>"; };
-		6D26B9FD2C6FF62300267428 /* CUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUser.swift; sourceTree = "<group>"; };
+		6D26B9FD2C6FF62300267428 /* GUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUser.swift; sourceTree = "<group>"; };
 		6D26B9FF2C6FF62300267428 /* UserRepositoryCaches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepositoryCaches.swift; sourceTree = "<group>"; };
 		6D26BA012C6FF62300267428 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		6D26BA042C6FF62300267428 /* UserUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
@@ -203,6 +209,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D02ED7E2C71EAE60053EA26 /* Storages */ = {
+			isa = PBXGroup;
+			children = (
+				6D02ED882C71F33A0053EA26 /* Entities */,
+				6D02ED7F2C71EB7E0053EA26 /* CoreDataStorage */,
+			);
+			path = Storages;
+			sourceTree = "<group>";
+		};
+		6D02ED7F2C71EB7E0053EA26 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				6D02ED802C71EBF90053EA26 /* CoreDataStorage.swift */,
+				6D02ED852C71F0BC0053EA26 /* CoreDataStorage.xcdatamodeld */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		6D02ED882C71F33A0053EA26 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				6D02ED892C71F3950053EA26 /* SUserEntityExtensions.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		6D26B9982C6FF47900267428 = {
 			isa = PBXGroup;
 			children = (
@@ -232,14 +264,13 @@
 				6D26B9F12C6FF61200267428 /* Common */,
 				6D26BA412C6FF77600267428 /* Utils */,
 				6D26B9DF2C6FF5B300267428 /* Network */,
-				6D26B9F92C6FF61A00267428 /* Data */,
 				6D26BA062C6FF62300267428 /* Domain */,
+				6D26B9F92C6FF61A00267428 /* Data */,
 				6D26BA182C6FF62A00267428 /* Presentation */,
 				6D26BA2A2C6FF65400267428 /* Application */,
 				6D26BA2F2C6FF66D00267428 /* Resources */,
 				6D26B9B22C6FF47C00267428 /* LaunchScreen.storyboard */,
 				6D26B9B52C6FF47C00267428 /* Info.plist */,
-				6D26B9AD2C6FF47900267428 /* TymeXTest.xcdatamodeld */,
 			);
 			path = TymeXTest;
 			sourceTree = "<group>";
@@ -317,7 +348,7 @@
 		6D26B9F52C6FF61A00267428 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				6D26B9F42C6FF61A00267428 /* CUserDTO.swift */,
+				6D26B9F42C6FF61A00267428 /* GUserDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -336,6 +367,7 @@
 			children = (
 				6D26B9F52C6FF61A00267428 /* DTO */,
 				6D26B9F82C6FF61A00267428 /* Repositories */,
+				6D02ED7E2C71EAE60053EA26 /* Storages */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -343,17 +375,17 @@
 		6D26B9FE2C6FF62300267428 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				6D26B9FD2C6FF62300267428 /* CUser.swift */,
+				6D26B9FD2C6FF62300267428 /* GUser.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		6D26BA002C6FF62300267428 /* Caches */ = {
+		6D26BA002C6FF62300267428 /* Storages */ = {
 			isa = PBXGroup;
 			children = (
 				6D26B9FF2C6FF62300267428 /* UserRepositoryCaches.swift */,
 			);
-			path = Caches;
+			path = Storages;
 			sourceTree = "<group>";
 		};
 		6D26BA022C6FF62300267428 /* Repositories */ = {
@@ -367,7 +399,7 @@
 		6D26BA032C6FF62300267428 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				6D26BA002C6FF62300267428 /* Caches */,
+				6D26BA002C6FF62300267428 /* Storages */,
 				6D26BA022C6FF62300267428 /* Repositories */,
 			);
 			path = Interfaces;
@@ -470,6 +502,7 @@
 				6D26BA3E2C6FF77600267428 /* OnMainThreadExecutor.swift */,
 				6D26BA3F2C6FF77600267428 /* Protocol.swift */,
 				6D26BA402C6FF77600267428 /* Then.swift */,
+				6D02ED8B2C720F3D0053EA26 /* RepositoryTask.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -775,10 +808,11 @@
 				6D26BA212C6FF62A00267428 /* HomeViewController.swift in Sources */,
 				6D26BA222C6FF62A00267428 /* HomeViewModel.swift in Sources */,
 				6D26B9E12C6FF5B300267428 /* UserProfileParams.swift in Sources */,
+				6D02ED872C71F0BC0053EA26 /* CoreDataStorage.xcdatamodeld in Sources */,
 				6D26BA442C6FF77600267428 /* LoadingView.swift in Sources */,
 				6D63BE3C2C7138F0006F31B2 /* UserDetailsViewController.swift in Sources */,
 				6D63BE392C712E3F006F31B2 /* UIImageViewExtensions.swift in Sources */,
-				6D26B9FA2C6FF61A00267428 /* CUserDTO.swift in Sources */,
+				6D26B9FA2C6FF61A00267428 /* GUserDTO.swift in Sources */,
 				6D26BA5A2C70846C00267428 /* OptionalExtensions.swift in Sources */,
 				6D26B9EA2C6FF5F600267428 /* DictionaryExtensions.swift in Sources */,
 				6D26BA482C6FF77600267428 /* Then.swift in Sources */,
@@ -796,21 +830,23 @@
 				6D63BE432C714222006F31B2 /* UserDetailFollowCell.swift in Sources */,
 				6D26BA462C6FF77600267428 /* OnMainThreadExecutor.swift in Sources */,
 				6D26BA432C6FF77600267428 /* HideKeyboardable.swift in Sources */,
+				6D02ED8A2C71F3950053EA26 /* SUserEntityExtensions.swift in Sources */,
 				6D26BA422C6FF77600267428 /* ClassName.swift in Sources */,
 				6D26BA452C6FF77600267428 /* Observable.swift in Sources */,
-				6D26BA072C6FF62300267428 /* CUser.swift in Sources */,
+				6D26BA072C6FF62300267428 /* GUser.swift in Sources */,
 				6D26BA1E2C6FF62A00267428 /* CustomSFSafariViewController.swift in Sources */,
 				6D26BA4A2C6FFBA100267428 /* GetUserProfileRequest.swift in Sources */,
 				6D26BA2B2C6FF65400267428 /* AppDelegate.swift in Sources */,
 				6D26BA252C6FF63200267428 /* DataCenter.swift in Sources */,
 				6D26BA202C6FF62A00267428 /* HomeNavigator.swift in Sources */,
+				6D02ED8C2C720F3D0053EA26 /* RepositoryTask.swift in Sources */,
 				6D26B9EB2C6FF5F600267428 /* ErrorExtensions.swift in Sources */,
 				6D26BA582C7080FC00267428 /* ArrayExtensions.swift in Sources */,
 				6D26B9E02C6FF5B300267428 /* GetUserListParams.swift in Sources */,
+				6D02ED812C71EBF90053EA26 /* CoreDataStorage.swift in Sources */,
 				6D26B9EC2C6FF5F600267428 /* StringExtensions.swift in Sources */,
 				6D26BA372C6FF6E900267428 /* CBaseDIContainer.swift in Sources */,
 				6D26BA2D2C6FF65400267428 /* SceneDelegate.swift in Sources */,
-				6D26B9AF2C6FF47900267428 /* TymeXTest.xcdatamodeld in Sources */,
 				6D26BA2C2C6FF65400267428 /* AppFlowNavigator.swift in Sources */,
 				6D26B9FC2C6FF61A00267428 /* UserRepositoryHandler.swift in Sources */,
 				6D26BA092C6FF62300267428 /* UserRepository.swift in Sources */,
@@ -1188,13 +1224,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6D26B9AD2C6FF47900267428 /* TymeXTest.xcdatamodeld */ = {
+		6D02ED852C71F0BC0053EA26 /* CoreDataStorage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6D26B9AE2C6FF47900267428 /* TymeXTest.xcdatamodel */,
+				6D02ED862C71F0BC0053EA26 /* CoreDataStorage.xcdatamodel */,
 			);
-			currentVersion = 6D26B9AE2C6FF47900267428 /* TymeXTest.xcdatamodel */;
-			path = TymeXTest.xcdatamodeld;
+			currentVersion = 6D02ED862C71F0BC0053EA26 /* CoreDataStorage.xcdatamodel */;
+			name = CoreDataStorage.xcdatamodeld;
+			path = /Users/thanhnhut/Documents/TymeXTest/TymeXTest/Data/Storages/CoreDataStorage/CoreDataStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

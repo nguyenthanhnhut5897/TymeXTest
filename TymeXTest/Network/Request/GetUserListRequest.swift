@@ -9,7 +9,7 @@ import iOSAPIService
 
 struct GetUserListRequest: Requestable {
     
-    typealias Response = [CUserDTO]
+    typealias Response = [GUserDTO]
     
     var httpMethod: HTTPMethod {
         return .get

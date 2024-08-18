@@ -9,7 +9,7 @@ import UIKit
 
 protocol HomeNavigatorDependencies {
     func makeHomeViewController(actions: HomeViewModelActions?) -> HomeViewController
-    func makeUserDetailViewController(user: CUser?, actions: UserDetailsModelActions?) -> UserDetailsViewController
+    func makeUserDetailViewController(user: GUser?, actions: UserDetailsModelActions?) -> UserDetailsViewController
 }
 
 final class HomeNavigator {
@@ -30,7 +30,7 @@ final class HomeNavigator {
         navigationController?.pushViewController(vc, animated: false)
     }
     
-    private func showUserDetails(user: CUser?) {
+    private func showUserDetails(user: GUser?) {
         let vc = dependencies.makeUserDetailViewController(user: user, actions: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
