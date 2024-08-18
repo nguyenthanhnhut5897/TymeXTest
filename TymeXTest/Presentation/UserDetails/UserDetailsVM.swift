@@ -31,7 +31,7 @@ final class UserDetailsVM: BaseViewModel, UserDetailsVMInput, UserDetailsVMOutpu
     var userInfo: Observable<GUser?> = Observable(nil)
     var error: Observable<Error?> = Observable(nil)
     
-    init(user: GUser?, userUsecase: UserUseCase, actions: UserDetailsModelActions?) {
+    init(user: GUser?, userUsecase: UserUseCase, actions: UserDetailsModelActions? = nil) {
         self.userInfo.value = user
         self.userUsecase = userUsecase
         self.actions = actions

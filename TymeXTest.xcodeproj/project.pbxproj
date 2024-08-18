@@ -14,6 +14,8 @@
 		6D02ED8A2C71F3950053EA26 /* SUserEntityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED892C71F3950053EA26 /* SUserEntityExtensions.swift */; };
 		6D02ED8C2C720F3D0053EA26 /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED8B2C720F3D0053EA26 /* RepositoryTask.swift */; };
 		6D02ED8F2C7228020053EA26 /* UserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED8E2C7228020053EA26 /* UserUseCaseTests.swift */; };
+		6D02ED922C728B500053EA26 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED912C728B500053EA26 /* HomeViewModelTests.swift */; };
+		6D02ED942C729B470053EA26 /* UserDetailsVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02ED932C729B470053EA26 /* UserDetailsVMTests.swift */; };
 		6D26B9B12C6FF47C00267428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D26B9B02C6FF47C00267428 /* Assets.xcassets */; };
 		6D26B9B42C6FF47C00267428 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6D26B9B32C6FF47C00267428 /* Base */; };
 		6D26B9C92C6FF47C00267428 /* TymeXTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26B9C82C6FF47C00267428 /* TymeXTestUITests.swift */; };
@@ -106,6 +108,8 @@
 		6D02ED892C71F3950053EA26 /* SUserEntityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUserEntityExtensions.swift; sourceTree = "<group>"; };
 		6D02ED8B2C720F3D0053EA26 /* RepositoryTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		6D02ED8E2C7228020053EA26 /* UserUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCaseTests.swift; sourceTree = "<group>"; };
+		6D02ED912C728B500053EA26 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		6D02ED932C729B470053EA26 /* UserDetailsVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVMTests.swift; sourceTree = "<group>"; };
 		6D26B9A12C6FF47900267428 /* TymeXTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TymeXTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D26B9B02C6FF47C00267428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D26B9B32C6FF47C00267428 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -243,6 +247,15 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		6D02ED902C728B3B0053EA26 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6D02ED912C728B500053EA26 /* HomeViewModelTests.swift */,
+				6D02ED932C729B470053EA26 /* UserDetailsVMTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		6D26B9982C6FF47900267428 = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +299,7 @@
 		6D26B9BD2C6FF47C00267428 /* TymeXTestTests */ = {
 			isa = PBXGroup;
 			children = (
+				6D02ED902C728B3B0053EA26 /* ViewModels */,
 				6D02ED8D2C7227720053EA26 /* UseCases */,
 			);
 			path = TymeXTestTests;
@@ -876,6 +890,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D02ED8F2C7228020053EA26 /* UserUseCaseTests.swift in Sources */,
+				6D02ED922C728B500053EA26 /* HomeViewModelTests.swift in Sources */,
+				6D02ED942C729B470053EA26 /* UserDetailsVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

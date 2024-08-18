@@ -10,7 +10,7 @@ import XCTest
 
 final class UserUseCaseTests: XCTestCase {
     
-    static let userList: [GUser] = {
+    let userList: [GUser] = {
         var users: [GUser] = []
         
         for i in 0..<20 {
@@ -54,7 +54,7 @@ final class UserUseCaseTests: XCTestCase {
     }
     
     func testFetchUsersSuccessfullyUseCase() {
-        let moviesRepository = UserRepositoryHandlerMock(result: .success(UserUseCaseTests.userList),
+        let moviesRepository = UserRepositoryHandlerMock(result: .success(userList),
                                                          cacheResult: nil)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
         let perPage: Int = 20
@@ -79,8 +79,8 @@ final class UserUseCaseTests: XCTestCase {
     }
     
     func testFetchUsersSuccessfullyUseCase_hasCached() {
-        let moviesRepository = UserRepositoryHandlerMock(result: .success(UserUseCaseTests.userList),
-                                                         cacheResult: UserUseCaseTests.userList)
+        let moviesRepository = UserRepositoryHandlerMock(result: .success(userList),
+                                                         cacheResult: userList)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
         let perPage: Int = 20
         let query = GetUserListParams(page: 0, perPage: perPage)
@@ -128,12 +128,13 @@ final class UserUseCaseTests: XCTestCase {
         XCTAssertTrue(result.isEmpty)
         XCTAssertTrue(cache.isEmpty)
         XCTAssertTrue(error != nil)
+        XCTAssertTrue(error?.code == 600)
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
     
     func testFetchUsersFailedUseCase_hasCached() {
         let moviesRepository = UserRepositoryHandlerMock(result: .failure(NSError(domain: "", code: 600)),
-                                                         cacheResult: UserUseCaseTests.userList)
+                                                         cacheResult: userList)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
         let perPage: Int = 20
         let query = GetUserListParams(page: 0, perPage: perPage)
@@ -154,13 +155,14 @@ final class UserUseCaseTests: XCTestCase {
         
         XCTAssertTrue(result.isEmpty)
         XCTAssertTrue(error != nil)
+        XCTAssertTrue(error?.code == 600)
         XCTAssertTrue(cache.count == perPage)
         XCTAssertTrue(cache.contains(where: { $0.username == "username0" }))
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
     
     func testFetchUserProfileSuccessfullyUseCase() {
-        let moviesRepository = UserRepositoryHandlerMock(result: .success(UserUseCaseTests.userList),
+        let moviesRepository = UserRepositoryHandlerMock(result: .success(userList),
                                                          cacheResult: nil)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
         let params = UserProfileParams(username: "username3")
@@ -180,7 +182,7 @@ final class UserUseCaseTests: XCTestCase {
     }
     
     func testFetchUserProfileFailedUseCase() {
-        let moviesRepository = UserRepositoryHandlerMock(result: .failure(NSError(domain: "", code: 600)),
+        let moviesRepository = UserRepositoryHandlerMock(result: .failure(NSError(domain: "", code: 602)),
                                                          cacheResult: nil)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
         let params = UserProfileParams(username: "username3")
@@ -198,6 +200,7 @@ final class UserUseCaseTests: XCTestCase {
         
         XCTAssertTrue(result == nil)
         XCTAssertTrue(error != nil)
+        XCTAssertTrue(error?.code == 602)
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
 }

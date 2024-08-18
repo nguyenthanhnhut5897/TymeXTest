@@ -29,7 +29,7 @@ final class HomeViewModel: BaseViewModel, HomeViewModelInput, HomeViewModelOutpu
     var userList: Observable<[GUser]> = Observable([])
     var error: Observable<Error?> = Observable(nil)
     
-    init(userUsecase: UserUseCase, actions: HomeViewModelActions?) {
+    init(userUsecase: UserUseCase, actions: HomeViewModelActions? = nil) {
         self.userUsecase = userUsecase
         self.actions = actions
     }
@@ -47,6 +47,7 @@ extension HomeViewModel {
         
         let params = GetUserListParams(page: page, perPage: limit)
         var hasDataCache: Bool = false
+        self.error.value = nil
         
         userUsecase.getUsersList(params: params) { [weak self] usersCache in
             guard let self else { return }

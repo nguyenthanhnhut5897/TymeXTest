@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GUser {
+struct GUser: Equatable {
     let username: String?
     let landingPageUrl: String?
     let avatarUrl: String?
