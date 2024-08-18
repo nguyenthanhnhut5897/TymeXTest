@@ -11,7 +11,6 @@ protocol UserRepository: CRepository {
     @discardableResult
     func getUserProfile(
         query: UserProfileParams,
-        cached: @escaping (GUser?) -> Void,
         completion: @escaping (Result<GUser?, Error>) -> Void
     ) -> TaskCancellable?
     

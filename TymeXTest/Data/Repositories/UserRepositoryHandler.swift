@@ -18,7 +18,7 @@ final class UserRepositoryHandler {
 }
 
 extension UserRepositoryHandler: UserRepository {
-    func getUserProfile(query: UserProfileParams, cached: @escaping (GUser?) -> Void, completion: @escaping (Result<GUser?, Error>) -> Void) -> TaskCancellable? {
+    func getUserProfile(query: UserProfileParams, completion: @escaping (Result<GUser?, Error>) -> Void) -> TaskCancellable? {
         
         let task = RepositoryTask()
         let request = GetUserProfileRequest(param: query)

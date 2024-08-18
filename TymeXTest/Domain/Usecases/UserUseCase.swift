@@ -18,7 +18,6 @@ protocol UserUseCase: CUseCase {
     @discardableResult
     func getUserProfile(
         params: UserProfileParams,
-        cached: @escaping (GUser?) -> Void,
         completion: @escaping (Result<GUser?, Error>) -> Void
     ) -> TaskCancellable?
 }
@@ -43,10 +42,9 @@ final class UserUseCaseHandler: UserUseCase {
     
     @discardableResult
     func getUserProfile(params: UserProfileParams,
-                       cached: @escaping (GUser?) -> Void,
                        completion: @escaping (Result<GUser?, Error>) -> Void) -> TaskCancellable?
     {
-        return userRepository.getUserProfile(query: params, cached: cached) { result in
+        return userRepository.getUserProfile(query: params) { result in
             completion(result)
         }
     }

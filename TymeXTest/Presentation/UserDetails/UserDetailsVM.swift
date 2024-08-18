@@ -51,15 +51,12 @@ extension UserDetailsVM {
         
         let params = UserProfileParams(username: username)
         
-        userUsecase.getUserProfile(params: params) { usersCache in
-            
-        } completion: {  [weak self] result in
+        userUsecase.getUserProfile(params: params) { [weak self] result in
             LoadingView.hide()
             
             switch result {
             case .success(let user):
                 self?.userInfo.value = user
-                print(user)
             case .failure(let error):
                 self?.error.value = error
                 print(error.localizedDescription)
