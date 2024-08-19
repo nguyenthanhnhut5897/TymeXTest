@@ -9,6 +9,7 @@ import XCTest
 @testable import TymeXTest
 
 final class UserDetailsVMTests: XCTestCase {
+    
     static let userInfo = GUser(username: "username", landingPageUrl: "", avatarUrl: "", location: "hcm", followers: Int.random(in: 0...1000), following: Int.random(in: 0...1000))
     
     class FetchUserProfileUseCaseMock: UserUseCase {
@@ -41,6 +42,7 @@ final class UserDetailsVMTests: XCTestCase {
         }
     }
     
+    /// test fetching user profile and have data response
     func testFetchUserProfileUseCaseHasData() {
         let fetchUserProfileUseCaseMock = FetchUserProfileUseCaseMock()
 
@@ -59,6 +61,7 @@ final class UserDetailsVMTests: XCTestCase {
         addTeardownBlock { [weak vm] in XCTAssertNil(vm) }
     }
     
+    /// test fetching user profile and the error happen
     func testFetchUserProfileUseCaseError() {
         let fetchUserProfileUseCaseMock = FetchUserProfileUseCaseMock()
 

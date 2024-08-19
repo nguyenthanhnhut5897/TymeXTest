@@ -53,7 +53,8 @@ final class UserUseCaseTests: XCTestCase {
         }
     }
     
-    func testFetchUsersSuccessfullyUseCase() {
+    /// test fetch user list successful
+    func testFetchUsersSuccessfulUseCase() {
         let moviesRepository = UserRepositoryHandlerMock(result: .success(userList),
                                                          cacheResult: nil)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
@@ -78,7 +79,8 @@ final class UserUseCaseTests: XCTestCase {
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
     
-    func testFetchUsersSuccessfullyUseCase_hasCached() {
+    /// test fetch user list successful from api and cache
+    func testFetchUsersSuccessfulUseCase_hasCached() {
         let moviesRepository = UserRepositoryHandlerMock(result: .success(userList),
                                                          cacheResult: userList)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
@@ -104,6 +106,7 @@ final class UserUseCaseTests: XCTestCase {
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
     
+    /// test fetch user list failed
     func testFetchUsersFailedUseCase() {
         let moviesRepository = UserRepositoryHandlerMock(result: .failure(NSError(domain: "", code: 600)),
                                                          cacheResult: nil)
@@ -132,6 +135,7 @@ final class UserUseCaseTests: XCTestCase {
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
     
+    /// test fetch user list failed from api and successful from cache
     func testFetchUsersFailedUseCase_hasCached() {
         let moviesRepository = UserRepositoryHandlerMock(result: .failure(NSError(domain: "", code: 600)),
                                                          cacheResult: userList)
@@ -161,7 +165,8 @@ final class UserUseCaseTests: XCTestCase {
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
     
-    func testFetchUserProfileSuccessfullyUseCase() {
+    /// test fetch user profile successful
+    func testFetchUserProfileSuccessfulUseCase() {
         let moviesRepository = UserRepositoryHandlerMock(result: .success(userList),
                                                          cacheResult: nil)
         let useCase = UserUseCaseHandler(userRepository: moviesRepository)
@@ -181,6 +186,7 @@ final class UserUseCaseTests: XCTestCase {
         XCTAssertEqual(moviesRepository.fetchUsersCompletionCount, 1)
     }
     
+    /// test fetch user profile failed
     func testFetchUserProfileFailedUseCase() {
         let moviesRepository = UserRepositoryHandlerMock(result: .failure(NSError(domain: "", code: 602)),
                                                          cacheResult: nil)

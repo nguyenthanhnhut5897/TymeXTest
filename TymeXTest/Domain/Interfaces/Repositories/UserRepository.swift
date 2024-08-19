@@ -11,7 +11,7 @@ protocol UserRepository: CRepository {
     
     /// Fetch a profile of an user
     /// - Parameters:
-    ///   - query: query object
+    ///   - query: query object, that include usename
     ///   - completion: return success with user info or failed with an error
     /// - Returns: return a fetch profile task
     @discardableResult

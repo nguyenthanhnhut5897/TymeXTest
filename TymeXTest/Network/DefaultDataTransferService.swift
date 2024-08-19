@@ -7,8 +7,8 @@
 
 import iOSAPIService
 
-// Where use ApiService only
-/// config: config off info to call api (baseurl, timeout, retryCount, ..)
+/// Where use ApiService only
+/// config: that info is used to call api (baseurl, timeout, retryCount, ..)
 final class DefaultDataTransferService: DataTransferService {
     private let config: ApiDataConfigurable
     

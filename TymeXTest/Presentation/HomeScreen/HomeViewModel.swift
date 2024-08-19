@@ -10,8 +10,17 @@ struct HomeViewModelActions {
 }
 
 protocol HomeViewModelInput {
+    /// Fetch new data info
+    /// - Parameter isRefresh:
+    ///    + isRefresh is true -> load data as the first time
+    ///    + isRefresh is false -> load more data if any
     func fetchData(isRefresh: Bool)
+    
+    /// Load more data if any
     func loadMoreIfNeed()
+    
+    /// User has selected an item
+    /// - Parameter index: index of the item
     func didSelectItem(at index: Int)
 }
 
@@ -36,6 +45,12 @@ final class HomeViewModel: BaseViewModel, HomeViewModelInput, HomeViewModelOutpu
 }
 
 extension HomeViewModel {
+    
+    /// Fetch new user list base on page index
+    /// - Parameter isRefresh:
+    ///    + isRefresh is true -> reset page index to 0 and do not need show LoadingView
+    ///    + isRefresh is false -> fetch user list with page index and show LoadingView
+    ///   After finish, the error will be updated in failed case and the userList will be updated in success case
     func fetchData(isRefresh: Bool = false) {
         if isRefresh {
             page = 0

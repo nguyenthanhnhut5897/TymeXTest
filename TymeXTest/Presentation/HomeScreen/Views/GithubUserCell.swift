@@ -38,6 +38,10 @@ class GithubUserCell: UITableViewCell {
         usernameLabel.text = nil
     }
     
+    /// bind data
+    /// - Parameters:
+    ///   - user: user info
+    ///   - mode: mode of cell, mode is list -> use cell in user list, mode is detail -> use cell in details page
     func bindData(user: GUser?, mode: GithubUserCellMode = .list) {
         self.data = user
         

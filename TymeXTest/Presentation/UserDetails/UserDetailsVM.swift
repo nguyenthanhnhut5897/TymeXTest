@@ -14,6 +14,10 @@ enum UserDetailsCellType: Int, CaseIterable {
 struct UserDetailsModelActions {}
 
 protocol UserDetailsVMInput {
+    /// Fetch new data info
+    /// - Parameter isRefresh:
+    ///    + isRefresh is true -> load data as the first time
+    ///    + isRefresh is false -> load more data if any
     func fetchData(isRefresh: Bool)
 }
 
@@ -39,6 +43,12 @@ final class UserDetailsVM: BaseViewModel, UserDetailsVMInput, UserDetailsVMOutpu
 }
 
 extension UserDetailsVM {
+    
+    /// Fetch user profile from username
+    /// - Parameter isRefresh:
+    ///    + isRefresh is true -> do not need show LoadingView
+    ///    + isRefresh is false -> show LoadingView
+    ///   After finish, the error will be updated in failed case and the userInfo will be updated in success case 
     func fetchData(isRefresh: Bool = false) {
         guard let username = userInfo.value?.username else {
             userInfo.value = nil

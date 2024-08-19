@@ -49,7 +49,8 @@ final class HomeViewModelTests: XCTestCase {
             return nil
         }
     }
-
+    
+    /// test fetching user list in no data case
     func testFetchUserListEmptyUseCase() {
         let fetchUsersUseCaseMock = FetchUsersUseCaseMock()
 
@@ -69,6 +70,7 @@ final class HomeViewModelTests: XCTestCase {
         addTeardownBlock { [weak vm] in XCTAssertNil(vm) }
     }
     
+    /// test fetching user list at the first page successful
     func testFetchUserListFirstPageUseCase() {
         let fetchUsersUseCaseMock = FetchUsersUseCaseMock()
 
@@ -89,6 +91,7 @@ final class HomeViewModelTests: XCTestCase {
         addTeardownBlock { [weak vm] in XCTAssertNil(vm) }
     }
     
+    /// test fetching user list at the first page then fetching the second page successful
     func testFetchUserListSecondPageUseCase() {
         let fetchUsersUseCaseMock = FetchUsersUseCaseMock()
 
@@ -122,6 +125,7 @@ final class HomeViewModelTests: XCTestCase {
         addTeardownBlock { [weak vm] in XCTAssertNil(vm) }
     }
     
+    /// test fetching user list at the last page successful and there is no more data
     func testFetchUserListLastPageUseCase_noMoreData() {
         let fetchUsersUseCaseMock = FetchUsersUseCaseMock()
 
@@ -162,6 +166,7 @@ final class HomeViewModelTests: XCTestCase {
         addTeardownBlock { [weak vm] in XCTAssertNil(vm) }
     }
     
+    /// test fetching user list failed
     func testFetchUserListUseCaseReturnsError() {
         let fetchUsersUseCaseMock = FetchUsersUseCaseMock()
 
@@ -183,6 +188,7 @@ final class HomeViewModelTests: XCTestCase {
         addTeardownBlock { [weak vm] in XCTAssertNil(vm) }
     }
     
+    /// test fetching user list -> receive cache data first -> receive data from api
     func testFetchUserListUseCaseReturnCachedData() {
         var cachedUsers: [GUser] = []
         
@@ -216,6 +222,7 @@ final class HomeViewModelTests: XCTestCase {
         addTeardownBlock { [weak vm] in XCTAssertNil(vm) }
     }
     
+    /// test fetching user list -> receive cache data first -> receive an error from api
     func testFetchUserListUseCaseReturnErrorAndShowCachedData() {
         var cachedUsers: [GUser] = []
         
