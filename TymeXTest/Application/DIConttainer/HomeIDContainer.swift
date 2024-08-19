@@ -15,12 +15,13 @@ final class HomeIDContainer: CBaseDIContainer {
     var dependencies: ApiDependencies
     
     // MARK: - Storage
-    private var userResponseCache: UserRepositoryCaches = UserRepositoryCachesHandler(maxStorageLimit: 20)
+    private var userResponseCache: UserRepositoryCaches = UserRepositoryCachesHandler()
     
     init(dependencies: ApiDependencies) {
         self.dependencies = dependencies
     }
     
+    // MARK: - Repository
     func makeRepository(screenName: CScreenName) -> CRepository? {
         switch screenName {
         case .Home, .UserDetails:
@@ -31,6 +32,7 @@ final class HomeIDContainer: CBaseDIContainer {
         }
     }
     
+    // MARK: - UseCase
     func makeUseCase(screenName: CScreenName) -> CUseCase? {
         switch screenName {
         case .Home, .UserDetails:
@@ -43,6 +45,7 @@ final class HomeIDContainer: CBaseDIContainer {
     }
 }
 
+// MARK: - NavigatorDependencies
 extension HomeIDContainer: HomeNavigatorDependencies {
     
     // MARK: Home

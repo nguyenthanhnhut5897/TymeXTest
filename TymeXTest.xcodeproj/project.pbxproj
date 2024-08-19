@@ -485,8 +485,8 @@
 			isa = PBXGroup;
 			children = (
 				6D26BA262C6FF65400267428 /* AppDelegate.swift */,
-				6D26BA272C6FF65400267428 /* AppFlowNavigator.swift */,
 				6D26BA282C6FF65400267428 /* SceneDelegate.swift */,
+				6D26BA272C6FF65400267428 /* AppFlowNavigator.swift */,
 				6D26BA242C6FF63200267428 /* DataCenter.swift */,
 				6D26BA292C6FF65400267428 /* TymeXTestAPIConfig.swift */,
 				6D26BA352C6FF6E900267428 /* DIConttainer */,

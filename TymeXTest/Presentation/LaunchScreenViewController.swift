@@ -10,8 +10,8 @@ import UIKit
 class LaunchScreenViewController: BaseViewController {
     var titleLabel = UILabel().then {
         $0.text = "TymeXTest"
+        $0.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         $0.textAlignment = .center
-        $0.backgroundColor = .red
     }
 
     override func viewDidLoad() {
@@ -22,8 +22,6 @@ class LaunchScreenViewController: BaseViewController {
         
         titleLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.equalTo(165)
-            $0.height.equalTo(112)
         }
     }
 }

@@ -7,13 +7,7 @@
 
 import CoreData
 
-final class UserRepositoryCachesHandler {
-    private let maxStorageLimit: Int
-    
-    init(maxStorageLimit: Int) {
-        self.maxStorageLimit = maxStorageLimit
-    }
-}
+final class UserRepositoryCachesHandler {}
 
 extension UserRepositoryCachesHandler: UserRepositoryCaches {
     func fetchRecentUserListQuery(query: GetUserListParams, completion: @escaping (Result<[GUser], Error>) -> Void) {
@@ -41,7 +35,7 @@ extension UserRepositoryCachesHandler: UserRepositoryCaches {
                 let entities = users.compactMap({ SUserEntity(userInfo: $0, insertInto: context) })
                 try context.save()
 
-                completion(.success(users))
+                completion(.success(entities.compactMap({ $0.toDomain() })))
             } catch {
                 completion(.failure(CoreDataStorageError.saveError(error)))
             }
@@ -51,7 +45,11 @@ extension UserRepositoryCachesHandler: UserRepositoryCaches {
 
 // MARK: - Private
 extension UserRepositoryCachesHandler {
-
+    
+    /// Clear data in storage before save new data
+    /// - Parameters:
+    ///   - users: the user list need to save, it will be updated after finish the func
+    ///   - context: context of core data
     private func cleanUpData(
         for users: inout [GUser],
         inContext context: NSManagedObjectContext
@@ -62,9 +60,13 @@ extension UserRepositoryCachesHandler {
         var result = try context.fetch(request)
         
         removeDuplicates(for: &users, in: &result, inContext: context)
-        removeOverLimit(limit: maxStorageLimit - 1, in: result, inContext: context)
     }
-
+    
+    /// Remove storage item if it exist in new list that need to save,
+    /// - Parameters:
+    ///   - newList: the user list need to save, it will be updated createdAt after finish the func
+    ///   - currentList: the user list has saved in storage, it will be removed the duplicate user after finish the func
+    ///   - context: context of core data
     private func removeDuplicates(
         for newList: inout [GUser],
         in currentList: inout [SUserEntity],
@@ -84,15 +86,5 @@ extension UserRepositoryCachesHandler {
         
         duplicateList.forEach { context.delete($0) }
         currentList = notDuplicateList
-    }
-
-    private func removeOverLimit(
-        limit: Int,
-        in currentList: [SUserEntity],
-        inContext context: NSManagedObjectContext
-    ) {
-        guard currentList.count > limit else { return }
-
-        currentList.suffix(currentList.count - limit).forEach { context.delete($0) }
     }
 }

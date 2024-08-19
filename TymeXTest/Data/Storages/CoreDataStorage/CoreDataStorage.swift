@@ -11,7 +11,6 @@ import CoreData
 enum CoreDataStorageError: Error {
     case readError(Error)
     case saveError(Error)
-    case deleteError(Error)
 }
 
 final class CoreDataStorage {
