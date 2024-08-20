@@ -1258,8 +1258,7 @@
 				6DCDB0072C7445040088C204 /* CoreDataStorage.xcdatamodel */,
 			);
 			currentVersion = 6DCDB0072C7445040088C204 /* CoreDataStorage.xcdatamodel */;
-			name = CoreDataStorage.xcdatamodeld;
-			path = /Users/thanhnhut/Documents/TymeXTest/TymeXTest/Data/Storages/CoreDataStorage/CoreDataStorage.xcdatamodeld;
+			path = CoreDataStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
